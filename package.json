@@ -29,6 +29,7 @@
     "@ckeditor/ckeditor5-remove-format": "^30.0.0",
     "@ckeditor/ckeditor5-special-characters": "^30.0.0",
     "@ckeditor/ckeditor5-table": "^30.0.0",
+    "@ckeditor/ckeditor5-upload": "^30.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^30.0.0",
     "@ckeditor/ckeditor5-word-count": "^30.0.0",
     "ckeditor5-math": "^30.0.0",

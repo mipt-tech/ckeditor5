@@ -2,7 +2,6 @@
  * @license Copyright (c) 2014-2021, CKSource - Frederico Knabben. All rights reserved.
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
-import InlineEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor.js';
 import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment.js';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat.js';
 import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage.js';
@@ -22,6 +21,7 @@ import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar.js';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload.js';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent.js';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock.js';
+import InlineEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor.js';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
 import Link from '@ckeditor/ckeditor5-link/src/link.js';
 import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage.js';
@@ -33,6 +33,7 @@ import Mention from '@ckeditor/ckeditor5-mention/src/mention.js';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice.js';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat.js';
+import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 import SpecialCharacters from '@ckeditor/ckeditor5-special-characters/src/specialcharacters.js';
 import SpecialCharactersArrows from '@ckeditor/ckeditor5-special-characters/src/specialcharactersarrows.js';
 import SpecialCharactersCurrency from '@ckeditor/ckeditor5-special-characters/src/specialcharacterscurrency.js';
@@ -52,7 +53,17 @@ import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
 import Mathematics from 'ckeditor5-math/src/math';
 import AutoformatMathematics from 'ckeditor5-math/src/autoformatmath';
 
-import 'katex';
+function getCookie(cname) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i=0; i<ca.length; i++) {
+	   var c = ca[i];
+	   while (c.charAt(0)==' ') c = c.substring(1);
+	   if(c.indexOf(name) == 0)
+		  return c.substring(name.length,c.length);
+	}
+	return "";
+}
 
 class Editor extends InlineEditor {}
 
@@ -104,7 +115,9 @@ Editor.builtinPlugins = [
 	TableToolbar,
 	TodoList,
 	Underline,
-	WordCount
+	WordCount,
+
+	SimpleUploadAdapter
 ];
 
 // Editor configuration.
@@ -165,6 +178,15 @@ Editor.defaultConfig = {
 		enablePreview: true, // Enable preview view
 		previewClassName: [], // Class names to add to previews
 		popupClassName: [] // Class names to add to math popup balloon
+	},
+	simpleUpload: {
+		// The URL that the images are uploaded to.
+		uploadUrl: 'http://polygon.endevir.ru:3000/api/upload/image',
+		withCredentials: true,
+		// Headers sent along with the XMLHttpRequest to the upload server.
+		headers: {
+			"X-CSRFToken": getCookie('csrftoken')
+		}
 	}
 };
 
