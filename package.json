@@ -53,5 +53,6 @@
   },
   "publishConfig": {
     "@fpmi:registry": " https://gitlab.example.com/api/v4/projects/31117836/packages/npm/"
-  }
+  },
+  "files": [ ]
 }
