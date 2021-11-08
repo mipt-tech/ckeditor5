@@ -12,6 +12,7 @@ import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code.js';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
+import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline.js';
 import Image from '@ckeditor/ckeditor5-image/src/image.js';
 import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert.js';
@@ -79,6 +80,7 @@ Editor.builtinPlugins = [
 	Code,
 	CodeBlock,
 	Essentials,
+	Heading,
 	HorizontalLine,
 	Image,
 	ImageInsert,
@@ -124,6 +126,7 @@ Editor.builtinPlugins = [
 Editor.defaultConfig = {
 	toolbar: {
 		items: [
+			'heading',
 			'alignment',
 			'bold',
 			'italic',
@@ -187,6 +190,15 @@ Editor.defaultConfig = {
 		headers: {
 			"X-CSRFToken": getCookie('csrftoken')
 		}
+	},
+	heading: {
+		options: [
+			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+			{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+		]
 	}
 };
 
