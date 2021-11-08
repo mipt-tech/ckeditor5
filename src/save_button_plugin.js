@@ -12,40 +12,35 @@ export default class SaveButton extends Plugin {
         console.log( 'SaveButton was initialized' );
 
         const editor = this.editor;
-        const saveClickedCallback = editor.config.saveButton && editor.config.saveButton.onSaveClicked 
-                                    ? 
-                                    editor.config.saveButton.onSaveClicked 
-                                    :
-                                    (() => new Promise((resolve) => { setTimeout(() => {resolve();}, 1000) }))
+        const pluginConfig = editor.config.get('saveButton');
 
         this.saveButton = editor.ui.componentFactory.add( 'saveButton', locale => {
             const view = new ButtonView( locale );
 
+
             const viewSetSaving = () => {
                 view.set( {
-                    label: ' Сохранение...',
+                    label: 'Сохранение...',
                     icon: LoadingIcon,
                     tooltip: false,
                     withText: true,
+                    isEnabled: false
                 } );
-    
-                // Callback executed once the image is clicked.
-                view.on('execute', () => {} );
             }
 
             const viewSetDefault = () => {
                 view.set( {
-                    label: ' Сохранить',
+                    label: 'Сохранить',
                     icon: SaveIcon,
                     tooltip: false,
                     withText: true,
+                    isEnabled: true
                 } );
-    
-                // Callback executed once the image is clicked.
-                view.on('execute', () => { viewSetSaving(); saveClickedCallback().then(() => viewSetDefault()); });
             }
 
             viewSetDefault();
+            // Callback executed once the button is clicked.
+            view.on('execute', () => { viewSetSaving(); pluginConfig.onSaveClicked().then(viewSetDefault).catch(viewSetDefault); });
 
             return view;
         } );
