@@ -55,6 +55,8 @@ import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
 import Mathematics from 'ckeditor5-math/src/math';
 import AutoformatMathematics from 'ckeditor5-math/src/autoformatmath';
 
+import SaveButton from './save_button_plugin';
+
 function getCookie(cname) {
 	var name = cname + "=";
 	var ca = document.cookie.split(';');
@@ -121,7 +123,8 @@ Editor.builtinPlugins = [
 	Underline,
 	WordCount,
 
-	SimpleUploadAdapter
+	SimpleUploadAdapter,
+	SaveButton
 ];
 
 // Editor configuration.
@@ -153,7 +156,9 @@ Editor.defaultConfig = {
 			'undo',
 			'redo',
 			'removeFormat',
-			'specialCharacters'
+			'specialCharacters',
+			'|',
+			'saveButton'
 		]
 	},
 	language: 'ru',
