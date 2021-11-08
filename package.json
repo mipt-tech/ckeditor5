@@ -33,17 +33,25 @@
     "@ckeditor/ckeditor5-theme-lark": "^30.0.0",
     "@ckeditor/ckeditor5-upload": "^30.0.0",
     "@ckeditor/ckeditor5-word-count": "^30.0.0",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/gitlab": "^7.0.4",
+    "@semantic-release/npm": "^8.0.3",
     "ckeditor5-math": "^30.0.0",
     "css-loader": "^5.2.7",
     "postcss": "^8.3.11",
     "postcss-loader": "^4.3.0",
     "raw-loader": "^4.0.2",
+    "semantic-release": "^18.0.0",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.3",
     "webpack": "^4.46.0",
     "webpack-cli": "^4.9.1"
   },
   "scripts": {
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "semantic-release": "semantic-release"
+  },
+  "publishConfig": {
+    "@fpmi:registry": " https://gitlab.example.com/api/v4/projects/31117836/packages/npm/"
   }
 }
