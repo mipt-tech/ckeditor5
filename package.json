@@ -1,8 +1,8 @@
 {
-  "name": "@stfpmi/ckeditor-inline",
+  "name": "@fpmi/ckeditor-inline",
   "author": "Arkhipov Ivan (me@endevir.ru)",
   "description": "A custom CKEditor 5 build made by STFPMI team",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "SEE LICENSE IN LICENSE.md",
   "private": false,
   "main": "./build/ckeditor.js",
