@@ -8,6 +8,8 @@ import LoadingIcon from './loading_icon.svg';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 
 export default class SaveButton extends Plugin {
+    static pluginName = "SaveButton";
+
     init() {
         console.log( 'SaveButton was initialized' );
 
