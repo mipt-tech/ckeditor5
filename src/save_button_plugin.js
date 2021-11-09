@@ -44,8 +44,7 @@ export default class SaveButton extends Plugin {
 
             viewSetDefault();
             // Callback executed once the button is clicked.
-            view.on('execute', () => { viewSetSaving(); pluginConfig.onSaveClicked().then(viewSetDefault).catch(viewSetDefault); });
-
+            view.on('execute', () => { viewSetSaving(); pluginConfig.onSaveClicked(this.editor.data.get()).then(viewSetDefault).catch(viewSetDefault); });
             return view;
         } );
     }

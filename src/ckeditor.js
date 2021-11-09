@@ -210,7 +210,7 @@ Editor.defaultConfig = {
 		]
 	},
 	saveButton: {
-		onSaveClicked: () => new Promise((resolve, reject) => {alert('No save callback defined'); setTimeout(reject, 2000);})
+		onSaveClicked: (editorData) => new Promise((resolve, reject) => {alert('No save callback defined'); console.log(editorData); setTimeout(reject, 2000);})
 	}
 };
 
