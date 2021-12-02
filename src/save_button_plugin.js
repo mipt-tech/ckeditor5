@@ -13,8 +13,6 @@ export default class SaveButton extends Plugin {
     }
 
     init() {
-        console.log( 'SaveButton was initialized' );
-
         const editor = this.editor;
         const pluginConfig = editor.config.get('saveButton');
 
