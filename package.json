@@ -62,8 +62,5 @@
   },
   "files": [
     "build/*"
-  ],
-  "dependencies": {
-    "katex": "^0.15.1"
-  }
+  ]
 }
