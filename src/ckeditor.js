@@ -9,6 +9,7 @@ import AutoLink from '@ckeditor/ckeditor5-link/src/autolink.js';
 import Autosave from '@ckeditor/ckeditor5-autosave/src/autosave.js';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote.js';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold.js';
+import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code.js';
 import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock.js';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials.js';
@@ -23,7 +24,7 @@ import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar.js';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload.js';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent.js';
 import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock.js';
-import InlineEditor from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor.js';
+import InlineEditorBase from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor.js';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
 import Link from '@ckeditor/ckeditor5-link/src/link.js';
 import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage.js';
@@ -69,149 +70,111 @@ function getCookie(cname) {
 	return "";
 }
 
-class Editor extends InlineEditor {}
+const Plugins = [
+	Alignment, Autoformat, AutoImage, AutoLink, Autosave, BlockQuote, Bold, Code, CodeBlock, Essentials, Heading, HorizontalLine,
+	Image, ImageCaption, ImageInsert, ImageResize, ImageStyle, ImageToolbar, ImageUpload, Indent, IndentBlock, Italic, Link,
+	LinkImage, List, ListStyle, Mathematics, AutoformatMathematics, MediaEmbed, MediaEmbedToolbar, Mention, Paragraph,
+	PasteFromOffice, RemoveFormat, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency, SpecialCharactersEssentials, 
+	SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Table, TableCaption, TableCellProperties,
+	TableProperties, TableToolbar, TodoList, Underline, WordCount, SimpleUploadAdapter, SaveButton
+]
+
+const ToolbarItems = [
+	'heading', 'alignment', 'bold', 'italic', 'underline', 'link', '|',
+	'bulletedList', 'numberedList', 'todoList', '|',
+	'outdent', 'indent', '|',
+	'codeBlock', 'blockQuote', 'math', 'insertTable', 'imageUpload', 'mediaEmbed', 'horizontalLine', '|',
+	'undo', 'redo', 'removeFormat', 'specialCharacters', '|',
+	'saveButton'
+]
+
+const ImageToolbarConfig = [
+	'imageStyle:block', 'imageStyle:side', 'imageStyle:inline', '|',
+	'linkImage', 'toggleImageCaption',
+]
+
+const TableContentToolbarConfig = [
+	'tableColumn', 'tableRow', 'mergeTableCells', 'tableCellProperties', 'tableProperties'
+]
+
+const MathConfig = {
+	engine: 'katex', // or katex or function. E.g. (equation, element, display) => { ... }
+	lazyLoad: undefined, // async () => { ... }, called once before rendering first equation if engine doesn't exist. After resolving promise, plugin renders equations.
+	outputType: 'span', // or span
+	forceOutputType: false, // forces output to use outputType
+	enablePreview: true, // Enable preview view
+	previewClassName: [], // Class names to add to previews
+	popupClassName: [] // Class names to add to math popup balloon
+}
+
+const UploadConfig = {
+	// The URL that the images are uploaded to.
+	uploadUrl: 'http://polygon.endevir.ru:3000/api/upload/image',
+	withCredentials: true,
+	// Headers sent along with the XMLHttpRequest to the upload server.
+	headers: {
+		"X-CSRFToken": getCookie('csrftoken')
+	}
+}
+
+const HeadingConfig = {
+	options: [
+		{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+		{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+		{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+		{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+		{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
+	]
+}
+
+const SaveButtonDefaultConfig = {
+	onSaveClicked: (editorData) => new Promise((resolve, reject) => {alert('No save callback defined'); console.log(editorData); setTimeout(reject, 2000);})
+}
+
+class InlineEditor extends InlineEditorBase {}
 
 // Plugins to include in the build.
-Editor.builtinPlugins = [
-	Alignment,
-	Autoformat,
-	AutoImage,
-	AutoLink,
-	Autosave,
-	BlockQuote,
-	Bold,
-	Code,
-	CodeBlock,
-	Essentials,
-	Heading,
-	HorizontalLine,
-	Image,
-	ImageCaption,
-	ImageInsert,
-	ImageResize,
-	ImageStyle,
-	ImageToolbar,
-	ImageUpload,
-	Indent,
-	IndentBlock,
-	Italic,
-	Link,
-	LinkImage,
-	List,
-	ListStyle,
-	Mathematics,
-	AutoformatMathematics,
-	MediaEmbed,
-	MediaEmbedToolbar,
-	Mention,
-	Paragraph,
-	PasteFromOffice,
-	RemoveFormat,
-	SpecialCharacters,
-	SpecialCharactersArrows,
-	SpecialCharactersCurrency,
-	SpecialCharactersEssentials,
-	SpecialCharactersLatin,
-	SpecialCharactersMathematical,
-	SpecialCharactersText,
-	Table,
-	TableCaption,
-	TableCellProperties,
-	TableProperties,
-	TableToolbar,
-	TodoList,
-	Underline,
-	WordCount,
-
-	SimpleUploadAdapter,
-	SaveButton
-];
+InlineEditor.builtinPlugins = Plugins;
 
 // Editor configuration.
-Editor.defaultConfig = {
+InlineEditor.defaultConfig = {
 	toolbar: {
-		items: [
-			'heading',
-			'alignment',
-			'bold',
-			'italic',
-			'underline',
-			'link',
-			'|',
-			'bulletedList',
-			'numberedList',
-			'todoList',
-			'|',
-			'outdent',
-			'indent',
-			'|',
-			'codeBlock',
-			'blockQuote',
-			'math',
-			'insertTable',
-			'imageUpload',
-			'mediaEmbed',
-			'horizontalLine',
-			'|',
-			'undo',
-			'redo',
-			'removeFormat',
-			'specialCharacters',
-			'|',
-			'saveButton'
-		]
+		items: ToolbarItems
 	},
 	language: 'ru',
 	image: {
-		toolbar: [
-			'imageStyle:block',
-			'imageStyle:side',
-			'imageStyle:inline',
-			'|',
-			'linkImage',
-			'toggleImageCaption',
-			'imageTextAlternative'
-		]
+		toolbar: ImageToolbarConfig
 	},
 	table: {
-		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells',
-			'tableCellProperties',
-			'tableProperties'
-		]
+		contentToolbar: TableContentToolbarConfig
 	},
-	math: {
-		engine: 'katex', // or katex or function. E.g. (equation, element, display) => { ... }
-		lazyLoad: undefined, // async () => { ... }, called once before rendering first equation if engine doesn't exist. After resolving promise, plugin renders equations.
-		outputType: 'span', // or span
-		forceOutputType: false, // forces output to use outputType
-		enablePreview: true, // Enable preview view
-		previewClassName: [], // Class names to add to previews
-		popupClassName: [] // Class names to add to math popup balloon
-	},
-	simpleUpload: {
-		// The URL that the images are uploaded to.
-		uploadUrl: 'http://polygon.endevir.ru:3000/api/upload/image',
-		withCredentials: true,
-		// Headers sent along with the XMLHttpRequest to the upload server.
-		headers: {
-			"X-CSRFToken": getCookie('csrftoken')
-		}
-	},
-	heading: {
-		options: [
-			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-			{ model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
-		]
-	},
-	saveButton: {
-		onSaveClicked: (editorData) => new Promise((resolve, reject) => {alert('No save callback defined'); console.log(editorData); setTimeout(reject, 2000);})
-	}
+	math: MathConfig,
+	simpleUpload: UploadConfig,
+	heading: HeadingConfig,
+	saveButton: SaveButtonDefaultConfig
 };
 
-export default Editor;
+class ClassicEditor extends ClassicEditorBase {}
+
+// Plugins to include in the build.
+ClassicEditor.builtinPlugins = Plugins;
+
+// Editor configuration.
+ClassicEditor.defaultConfig = {
+	toolbar: {
+		items: ToolbarItems
+	},
+	language: 'ru',
+	image: {
+		toolbar: ImageToolbarConfig
+	},
+	table: {
+		contentToolbar: TableContentToolbarConfig
+	},
+	math: MathConfig,
+	simpleUpload: UploadConfig,
+	heading: HeadingConfig,
+	saveButton: SaveButtonDefaultConfig
+};
+
+export default {ClassicEditor, InlineEditor};
