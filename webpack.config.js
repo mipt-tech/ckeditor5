@@ -59,6 +59,20 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				test: /\.m?js$/,
+				exclude: /(node_modules|bower_components)/,
+				use: {
+				  loader: 'babel-loader',
+				  options: {
+
+				  }
+				}
+			},
+			{
+				test: /\.(woff|woff2|ttf|eot)$/,
+				use: [ 'file-loader?name=fonts/[name].[ext]!static' ]
+			},
+			{
 				test: /\.svg$/,
 				use: [ 'raw-loader' ]
 			},

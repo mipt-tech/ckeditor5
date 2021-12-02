@@ -58,6 +58,14 @@ import AutoformatMathematics from 'ckeditor5-math/src/autoformatmath';
 
 import SaveButton from './save_button_plugin';
 
+// import katex
+import katex from 'katex'
+import 'katex/dist/katex.min.css'
+// import 'katex/dist/katex.min.js'
+if (!window.katex) {
+	window.katex = katex;
+}
+
 function getCookie(cname) {
 	var name = cname + "=";
 	var ca = document.cookie.split(';');

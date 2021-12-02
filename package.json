@@ -7,14 +7,14 @@
   "private": false,
   "main": "./build/ckeditor.js",
   "devDependencies": {
+    "@babel/core": "^7.16.0",
     "@ckeditor/ckeditor5-alignment": "^30.0.0",
     "@ckeditor/ckeditor5-autoformat": "^30.0.0",
     "@ckeditor/ckeditor5-autosave": "^30.0.0",
     "@ckeditor/ckeditor5-basic-styles": "^30.0.0",
     "@ckeditor/ckeditor5-block-quote": "^30.0.0",
-    "@ckeditor/ckeditor5-core": "^30.0.0",
-    "@ckeditor/ckeditor5-ui": "^30.0.0",
     "@ckeditor/ckeditor5-code-block": "^30.0.0",
+    "@ckeditor/ckeditor5-core": "^30.0.0",
     "@ckeditor/ckeditor5-dev-utils": "^25.4.5",
     "@ckeditor/ckeditor5-dev-webpack-plugin": "^25.4.5",
     "@ckeditor/ckeditor5-editor-classic": "^30.0.0",
@@ -34,13 +34,16 @@
     "@ckeditor/ckeditor5-special-characters": "^30.0.0",
     "@ckeditor/ckeditor5-table": "^30.0.0",
     "@ckeditor/ckeditor5-theme-lark": "^30.0.0",
+    "@ckeditor/ckeditor5-ui": "^30.0.0",
     "@ckeditor/ckeditor5-upload": "^30.0.0",
     "@ckeditor/ckeditor5-word-count": "^30.0.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/gitlab": "^7.0.4",
     "@semantic-release/npm": "^8.0.3",
+    "babel-loader": "^8.2.3",
     "ckeditor5-math": "^30.0.0",
     "css-loader": "^5.2.7",
+    "file-loader": "^6.2.0",
     "postcss": "^8.3.11",
     "postcss-loader": "^4.3.0",
     "raw-loader": "^4.0.2",
@@ -59,5 +62,8 @@
   },
   "files": [
     "build/*"
-  ]
+  ],
+  "dependencies": {
+    "katex": "^0.15.1"
+  }
 }
