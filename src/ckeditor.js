@@ -56,8 +56,6 @@ import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
 import Mathematics from 'ckeditor5-math/src/math';
 import AutoformatMathematics from 'ckeditor5-math/src/autoformatmath';
 
-import SaveButton from './save_button_plugin';
-
 function getCookie(cname) {
 	var name = cname + "=";
 	var ca = document.cookie.split(';');
@@ -76,7 +74,7 @@ const Plugins = [
 	LinkImage, List, ListStyle, Mathematics, AutoformatMathematics, MediaEmbed, MediaEmbedToolbar, Mention, Paragraph,
 	PasteFromOffice, RemoveFormat, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency, SpecialCharactersEssentials, 
 	SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Table, TableCaption, TableCellProperties,
-	TableProperties, TableToolbar, TodoList, Underline, WordCount, SimpleUploadAdapter, SaveButton
+	TableProperties, TableToolbar, TodoList, Underline, WordCount, SimpleUploadAdapter
 ]
 
 const ToolbarItems = [
@@ -84,9 +82,7 @@ const ToolbarItems = [
 	'bulletedList', 'numberedList', 'todoList', '|',
 	'outdent', 'indent', '|',
 	'codeBlock', 'blockQuote', 'math', 'insertTable', 'imageUpload', 'mediaEmbed', 'horizontalLine', '|',
-	'undo', 'redo', 'removeFormat', 'specialCharacters', '|',
-	'saveButton'
-]
+	'undo', 'redo', 'removeFormat', 'specialCharacters']
 
 const ImageToolbarConfig = [
 	'imageStyle:block', 'imageStyle:side', 'imageStyle:inline', '|',
@@ -109,7 +105,7 @@ const MathConfig = {
 
 const UploadConfig = {
 	// The URL that the images are uploaded to.
-	uploadUrl: 'http://polygon.endevir.ru:3000/api/upload/image',
+	uploadUrl: '/api/upload/image',
 	withCredentials: true,
 	// Headers sent along with the XMLHttpRequest to the upload server.
 	headers: {
@@ -125,10 +121,6 @@ const HeadingConfig = {
 		{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
 		{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
 	]
-}
-
-const SaveButtonDefaultConfig = {
-	onSaveClicked: (editorData) => new Promise((resolve, reject) => {alert('No save callback defined'); console.log(editorData); setTimeout(reject, 2000);})
 }
 
 class InlineEditor extends InlineEditorBase {}
@@ -151,7 +143,6 @@ InlineEditor.defaultConfig = {
 	math: MathConfig,
 	simpleUpload: UploadConfig,
 	heading: HeadingConfig,
-	saveButton: SaveButtonDefaultConfig
 };
 
 class ClassicEditor extends ClassicEditorBase {}
@@ -174,7 +165,6 @@ ClassicEditor.defaultConfig = {
 	math: MathConfig,
 	simpleUpload: UploadConfig,
 	heading: HeadingConfig,
-	saveButton: SaveButtonDefaultConfig
 };
 
 export default {ClassicEditor, InlineEditor};
