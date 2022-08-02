@@ -2,7 +2,7 @@
   "name": "@fpmi/ckeditor5",
   "author": "Arkhipov Ivan (me@endevir.ru)",
   "description": "A custom CKEditor 5 build made by STFPMI team",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "license": "SEE LICENSE IN LICENSE.md",
   "private": false,
   "main": "./build/ckeditor.js",
