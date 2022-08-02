@@ -29,9 +29,8 @@ import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic.js';
 import Link from '@ckeditor/ckeditor5-link/src/link.js';
 import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage.js';
 import List from '@ckeditor/ckeditor5-list/src/list.js';
-import ListStyle from '@ckeditor/ckeditor5-list/src/liststyle.js';
+import ListProperties from '@ckeditor/ckeditor5-list/src/listproperties';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed.js';
-import MediaEmbedToolbar from '@ckeditor/ckeditor5-media-embed/src/mediaembedtoolbar.js';
 import Mention from '@ckeditor/ckeditor5-mention/src/mention.js';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph.js';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice.js';
@@ -71,7 +70,7 @@ function getCookie(cname) {
 const Plugins = [
 	Alignment, Autoformat, AutoImage, AutoLink, Autosave, BlockQuote, Bold, Code, CodeBlock, Essentials, Heading, HorizontalLine,
 	Image, ImageCaption, ImageInsert, ImageResize, ImageStyle, ImageToolbar, ImageUpload, Indent, IndentBlock, Italic, Link,
-	LinkImage, List, ListStyle, Mathematics, AutoformatMathematics, MediaEmbed, MediaEmbedToolbar, Mention, Paragraph,
+	LinkImage, List, ListProperties, Mathematics, AutoformatMathematics, MediaEmbed, Mention, Paragraph,
 	PasteFromOffice, RemoveFormat, SpecialCharacters, SpecialCharactersArrows, SpecialCharactersCurrency, SpecialCharactersEssentials, 
 	SpecialCharactersLatin, SpecialCharactersMathematical, SpecialCharactersText, Table, TableCaption, TableCellProperties,
 	TableProperties, TableToolbar, TodoList, Underline, WordCount, SimpleUploadAdapter
