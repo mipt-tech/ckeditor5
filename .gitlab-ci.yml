@@ -1,5 +1,5 @@
 default:
-  image: node:14
+  image: node:21
   before_script:
     - npm ci --cache .npm --prefer-offline
     - |
