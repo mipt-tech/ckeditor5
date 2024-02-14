@@ -29,3 +29,5 @@ publish:
     - npm run semantic-release
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  tags:
+    - mipt_tech
