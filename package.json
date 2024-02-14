@@ -1,5 +1,5 @@
 {
-  "name": "@fpmi/ckeditor5",
+  "name": "@mipt.tech/ckeditor5",
   "author": "Arkhipov Ivan (me@endevir.ru)",
   "description": "A custom CKEditor 5 build made by STFPMI team",
   "version": "1.4.1",
@@ -15,8 +15,8 @@
     "@ckeditor/ckeditor5-block-quote": "^34.1.0",
     "@ckeditor/ckeditor5-code-block": "^34.1.0",
     "@ckeditor/ckeditor5-core": "^34.1.0",
-    "@ckeditor/ckeditor5-dev-utils": "^25.4.5",
-    "@ckeditor/ckeditor5-dev-webpack-plugin": "^25.4.5",
+    "@ckeditor/ckeditor5-dev-utils": "^39.6.1",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^31.1.13",
     "@ckeditor/ckeditor5-editor-classic": "^34.1.0",
     "@ckeditor/ckeditor5-editor-inline": "^34.1.0",
     "@ckeditor/ckeditor5-essentials": "^34.1.0",
@@ -38,7 +38,7 @@
     "@ckeditor/ckeditor5-upload": "^34.1.0",
     "@ckeditor/ckeditor5-word-count": "^34.1.0",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/gitlab": "^7.0.4",
+    "@semantic-release/gitlab": "^13.0.2",
     "@semantic-release/npm": "^8.0.3",
     "babel-loader": "^8.2.3",
     "ckeditor5-math": "^34.1.0",
@@ -47,10 +47,10 @@
     "postcss": "^8.3.11",
     "postcss-loader": "^4.3.0",
     "raw-loader": "^4.0.2",
-    "semantic-release": "^18.0.0",
+    "semantic-release": "^23.0.2",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.3",
-    "webpack": "^4.46.0",
+    "webpack": "^5.90.1",
     "webpack-cli": "^4.9.1"
   },
   "scripts": {
@@ -58,7 +58,7 @@
     "semantic-release": "semantic-release"
   },
   "publishConfig": {
-    "@fpmi:registry": " https://gitlab.com/api/v4/projects/31117836/packages/npm/"
+    "@mipt.tech:registry": " https://gitlab.com/api/v4/projects/31117836/packages/npm/"
   },
   "files": [
     "build/*"
